@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class ViewController: UIViewController {
+class EmitterViewController: UIViewController {
     
     var faces = [UIImage]()
     var currentFace: UIImage = #imageLiteral(resourceName: "will")
@@ -25,7 +25,7 @@ class ViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let position = touches.first!.location(in: view)
         
-        resizeFace(face: currentFace, newWidth: 30)
+        currentFace = ImageHelper.sharedInstance.resizeFace(face: currentFace, newWidth: 30)
         configureEmitter(x: position.x, y: position.y)
     }
     
@@ -45,7 +45,7 @@ class ViewController: UIViewController {
         let cell: CAEmitterCell = {
             let cell = CAEmitterCell()
             
-            cell.birthRate = 5
+            cell.birthRate = 4
             cell.lifetime = 12
             
             cell.velocity = 40
@@ -76,30 +76,23 @@ class ViewController: UIViewController {
     // MARK: - Removing animation
     
     func prepareToStopEmitter(emitter: CAEmitterLayer) {
+        // Stop emitting particles
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             emitter.birthRate = 0
         }
+        // Remove emitter from view.layer
         DispatchQueue.main.asyncAfter(deadline: .now() + 12) {
             emitter.removeFromSuperlayer()
         }
     }
     
-    // MARK: - Other
+    // MARK: - Navigation
     
-    func resizeFace(face: UIImage, newWidth: CGFloat) {
-        if face.size.width != 30 {
-            let scale = newWidth / face.size.width
-            let newHeight = face.size.height * scale
-            
-            UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
-            
-            face.draw(in: CGRect(x: 0, y: 0,width: newWidth, height: newHeight))
-            let newImage = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-            
-            currentFace = newImage!
-        }
+    @IBAction func test(_ sender: Any) {
+        
+        
     }
+    
 }
 
 

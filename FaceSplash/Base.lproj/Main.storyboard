@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Emitter View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="FaceSplash" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="EmitterViewController" customModule="FaceSplash" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -20,12 +20,83 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FiU-8p-6Bd">
+                                <rect key="frame" x="313" y="28" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="test:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ogu-aa-4CI"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="0.79215686269999996" green="0.8980392157" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
+        </scene>
+        <!--Page View Controller-->
+        <scene sceneID="h3m-EY-LKy">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="ca6-bT-viD" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V0D-4r-ijN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="617" y="-665"/>
+        </scene>
+        <!--Camera View Controller-->
+        <scene sceneID="EQQ-kh-fLH">
+            <objects>
+                <viewController id="PHO-ar-HMl" customClass="CameraViewController" customModule="FaceSplash" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="x8g-S1-Wtk"/>
+                        <viewControllerLayoutGuide type="bottom" id="APO-cb-wxT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="rCV-f6-T7s">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rsN-8e-dyx">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zTs-IY-eCV">
+                                <rect key="frame" x="149" y="550" width="77" height="30"/>
+                                <state key="normal" title="Take Photo"/>
+                                <connections>
+                                    <action selector="takePhoto:" destination="PHO-ar-HMl" eventType="touchUpInside" id="JWW-nI-oT8"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Orx-YQ-6bx">
+                                <rect key="frame" x="112" y="258" width="150" height="150"/>
+                                <color key="backgroundColor" red="0.92116194510799243" green="0.93028236040609136" blue="0.93028236040609136" alpha="0.1629120291095891" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="OA2-C1-xXe"/>
+                                    <constraint firstAttribute="width" constant="150" id="jdm-R5-t9K"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="rsN-8e-dyx" secondAttribute="trailing" id="3dY-Yy-tJ3"/>
+                            <constraint firstItem="zTs-IY-eCV" firstAttribute="centerX" secondItem="rCV-f6-T7s" secondAttribute="centerX" id="6EY-fc-hO0"/>
+                            <constraint firstItem="APO-cb-wxT" firstAttribute="top" secondItem="zTs-IY-eCV" secondAttribute="bottom" constant="87" id="8NY-Mx-a1d"/>
+                            <constraint firstItem="rsN-8e-dyx" firstAttribute="top" secondItem="rCV-f6-T7s" secondAttribute="top" id="YQo-AA-mVF"/>
+                            <constraint firstItem="rsN-8e-dyx" firstAttribute="leading" secondItem="rCV-f6-T7s" secondAttribute="leading" id="eaD-VE-xg8"/>
+                            <constraint firstItem="APO-cb-wxT" firstAttribute="top" secondItem="rsN-8e-dyx" secondAttribute="bottom" id="tf5-5v-RaE"/>
+                            <constraint firstItem="Orx-YQ-6bx" firstAttribute="centerY" secondItem="rCV-f6-T7s" secondAttribute="centerY" id="tnq-af-aAP"/>
+                            <constraint firstItem="Orx-YQ-6bx" firstAttribute="centerX" secondItem="rCV-f6-T7s" secondAttribute="centerX" id="uIa-V1-BQ6"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cameraView" destination="rsN-8e-dyx" id="6G7-ou-Tkr"/>
+                        <outlet property="headShotWaterMark" destination="Orx-YQ-6bx" id="Jzi-aK-PuI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ooo-0i-V6L" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1066.4000000000001" y="138.98050974512745"/>
         </scene>
     </scenes>
 </document>
