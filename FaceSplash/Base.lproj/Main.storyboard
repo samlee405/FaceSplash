@@ -22,13 +22,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FiU-8p-6Bd">
-                                <rect key="frame" x="313" y="28" width="46" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FiU-8p-6Bd">
+                                <rect key="frame" x="319" y="28" width="40" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="ExX-vd-1Wp"/>
-                                    <constraint firstAttribute="width" constant="46" id="YYy-dj-Y8G"/>
+                                    <constraint firstAttribute="height" constant="40" id="ExX-vd-1Wp"/>
+                                    <constraint firstAttribute="width" constant="40" id="YYy-dj-Y8G"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Button" image="refresh"/>
                                 <connections>
                                     <action selector="test:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ogu-aa-4CI"/>
                                 </connections>
@@ -40,6 +40,9 @@
                             <constraint firstItem="FiU-8p-6Bd" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="U3n-Lm-uHp"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="refreshImageButton" destination="FiU-8p-6Bd" id="kvq-3L-wZT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -70,8 +73,12 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zTs-IY-eCV">
-                                <rect key="frame" x="149" y="550" width="77" height="30"/>
-                                <state key="normal" title="Take Photo"/>
+                                <rect key="frame" x="157.5" y="572" width="60" height="60"/>
+                                <color key="backgroundColor" red="0.56281725888324874" green="0.56281725888324874" blue="0.56281725888324874" alpha="0.70020869006849318" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="6NV-Dg-KHs"/>
+                                    <constraint firstAttribute="width" constant="60" id="MYz-wG-Rah"/>
+                                </constraints>
                                 <connections>
                                     <action selector="takePhoto:" destination="PHO-ar-HMl" eventType="touchUpInside" id="JWW-nI-oT8"/>
                                 </connections>
@@ -89,7 +96,7 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="rsN-8e-dyx" secondAttribute="trailing" id="3dY-Yy-tJ3"/>
                             <constraint firstItem="zTs-IY-eCV" firstAttribute="centerX" secondItem="rCV-f6-T7s" secondAttribute="centerX" id="6EY-fc-hO0"/>
-                            <constraint firstItem="APO-cb-wxT" firstAttribute="top" secondItem="zTs-IY-eCV" secondAttribute="bottom" constant="87" id="8NY-Mx-a1d"/>
+                            <constraint firstItem="APO-cb-wxT" firstAttribute="top" secondItem="zTs-IY-eCV" secondAttribute="bottom" constant="35" id="8NY-Mx-a1d"/>
                             <constraint firstItem="rsN-8e-dyx" firstAttribute="top" secondItem="rCV-f6-T7s" secondAttribute="top" id="YQo-AA-mVF"/>
                             <constraint firstItem="rsN-8e-dyx" firstAttribute="leading" secondItem="rCV-f6-T7s" secondAttribute="leading" id="eaD-VE-xg8"/>
                             <constraint firstItem="APO-cb-wxT" firstAttribute="top" secondItem="rsN-8e-dyx" secondAttribute="bottom" id="tf5-5v-RaE"/>
@@ -100,6 +107,7 @@
                     <connections>
                         <outlet property="cameraView" destination="rsN-8e-dyx" id="6G7-ou-Tkr"/>
                         <outlet property="headShotWaterMark" destination="Orx-YQ-6bx" id="Jzi-aK-PuI"/>
+                        <outlet property="takePhotoButton" destination="zTs-IY-eCV" id="mUJ-rA-LiX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ooo-0i-V6L" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -107,4 +115,7 @@
             <point key="canvasLocation" x="1066.4000000000001" y="138.98050974512745"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="refresh" width="128" height="128"/>
+    </resources>
 </document>

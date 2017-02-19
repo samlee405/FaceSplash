@@ -13,6 +13,7 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate {
 
     @IBOutlet weak var cameraView: UIView!
     @IBOutlet weak var headShotWaterMark: UIView!
+    @IBOutlet weak var takePhotoButton: UIButton!
     
     var captureSession = AVCaptureSession()
     var sessionOutput = AVCapturePhotoOutput()
@@ -59,6 +60,7 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate {
         super.viewDidLoad()
         
         headShotWaterMark.layer.cornerRadius = 75
+        takePhotoButton.layer.cornerRadius = 30
     }
     
     // MARK: - Take Photo
@@ -66,12 +68,6 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     @IBAction func takePhoto(_ sender: Any) {
         
         print("did press takePhoto button")
-        
-//        if let videoConnection = sessionOutput.connection(withMediaType: AVMediaTypeVideo) {
-//            sessionOutput.capturePhoto(with: AVCapturePhotoSettings(format: [AVVideoCodecKey:AVVideoCodecJPEG]), delegate: self)
-//            
-//            
-//        }
         sessionOutput.capturePhoto(with: AVCapturePhotoSettings(format: [AVVideoCodecKey:AVVideoCodecJPEG]), delegate: self)
     }
 

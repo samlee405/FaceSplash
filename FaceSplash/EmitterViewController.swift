@@ -11,6 +11,8 @@ import AVFoundation
 
 class EmitterViewController: UIViewController {
     
+    @IBOutlet weak var refreshImageButton: UIButton!
+    
     var faces = [UIImage]()
     var currentFace: UIImage = #imageLiteral(resourceName: "will")
     
@@ -25,7 +27,7 @@ class EmitterViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let position = touches.first!.location(in: view)
         
-        currentFace = ImageHelper.sharedInstance.resizeFace(face: currentFace, newWidth: 30)
+        currentFace = ImageHelper.sharedInstance.resizeFace(face: currentFace, newWidth: 50)
         configureEmitter(x: position.x, y: position.y)
     }
     
@@ -62,7 +64,9 @@ class EmitterViewController: UIViewController {
             
             cell.scaleRange = 0.5
             
-            cell.contents = currentFace.cgImage
+            let roundedImage = ImageHelper.sharedInstance.roundedImage(image: currentFace, radius: 25)
+            
+            cell.contents = roundedImage.cgImage
             
             return cell
         }()
@@ -77,7 +81,7 @@ class EmitterViewController: UIViewController {
     
     func prepareToStopEmitter(emitter: CAEmitterLayer) {
         // Stop emitting particles
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             emitter.birthRate = 0
         }
         // Remove emitter from view.layer
@@ -89,8 +93,14 @@ class EmitterViewController: UIViewController {
     // MARK: - Navigation
     
     @IBAction func test(_ sender: Any) {
+        print("selecting new image")
         
+        refreshImageButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi / 2)
         
+        let count = ImageHelper.sharedInstance.images.count
+        if count > 0 {
+            currentFace = ImageHelper.sharedInstance.images[count - 1]
+        }
     }
     
 }

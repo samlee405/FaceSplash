@@ -16,7 +16,7 @@ class ImageHelper {
     var images = [UIImage]()
     
     func resizeFace(face: UIImage, newWidth: CGFloat) -> UIImage {
-        if face.size.width != 30 {
+        if face.size.width != newWidth {
             let scale = newWidth / face.size.width
             let newHeight = face.size.height * scale
             
@@ -26,6 +26,8 @@ class ImageHelper {
             let newImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
             
+            
+            
             return newImage!
         }
         
@@ -33,10 +35,27 @@ class ImageHelper {
     }
     
     func cropImage(uncroppedImage: UIImage) -> UIImage {
-        let cropFrame = CGRect(x: 112, y: 258, width: 150, height: 150)
+        let cropFrame = CGRect(x: 600, y: 400, width: 410, height: 400)
+        
         let imageRef = uncroppedImage.cgImage?.cropping(to: cropFrame)
         let croppedImage = UIImage(cgImage: imageRef!)
         
         return croppedImage
+    }
+    
+    func roundedImage(image: UIImage, radius: Float) -> UIImage {
+        let imageView: UIImageView = UIImageView(image: image)
+        var layer: CALayer = CALayer()
+        layer = imageView.layer
+        
+        layer.masksToBounds = true
+        layer.cornerRadius = CGFloat(radius)
+        
+        UIGraphicsBeginImageContext(imageView.bounds.size)
+        layer.render(in: UIGraphicsGetCurrentContext()!)
+        let roundedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return roundedImage!
     }
 }
