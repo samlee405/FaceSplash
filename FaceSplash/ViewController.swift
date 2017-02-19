@@ -14,30 +14,10 @@ class ViewController: UIViewController {
     var faces = [UIImage]()
     var currentFace: UIImage = #imageLiteral(resourceName: "will")
     
-    var emitters: [CAEmitterLayer] = []
-    var emitterIndex = 0
-    
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        initializeEmitters()
-    }
-    
-    // MARK: - Initializers
-    
-    func initializeEmitters() {
-        for _ in 0...9 {
-            let emitter: CAEmitterLayer = {
-                let emitter = CAEmitterLayer()
-                emitter.birthRate = 0
-            
-                return emitter
-            }()
-
-            emitters.append(emitter)
-        }
     }
     
     // MARK: - Initiating new animation
@@ -47,17 +27,21 @@ class ViewController: UIViewController {
         
         resizeFace(face: currentFace, newWidth: 30)
         configureEmitter(x: position.x, y: position.y)
-        configureCell()
-        prepareToStopEmitter()
     }
     
     func configureEmitter(x: CGFloat, y: CGFloat) {
-        emitters[emitterIndex].emitterPosition = CGPoint(x: x, y: y)
-        emitters[emitterIndex].birthRate = 1
-        emitters[emitterIndex].beginTime = CACurrentMediaTime()
+        let emitter: CAEmitterLayer = {
+            let emitter = CAEmitterLayer()
+            emitter.emitterPosition = CGPoint(x: x, y: y)
+            emitter.beginTime = CACurrentMediaTime()
+            
+            return emitter
+        }()
+        
+        configureCell(emitter: emitter)
     }
     
-    func configureCell() {
+    func configureCell(emitter: CAEmitterLayer) {
         let cell: CAEmitterCell = {
             let cell = CAEmitterCell()
             
@@ -83,30 +67,21 @@ class ViewController: UIViewController {
             return cell
         }()
         
-        emitters[emitterIndex].emitterCells = [cell]
-        view.layer.addSublayer(emitters[emitterIndex])
+        emitter.emitterCells = [cell]
+        view.layer.addSublayer(emitter)
+        
+        prepareToStopEmitter(emitter: emitter)
     }
     
     // MARK: - Removing animation
     
-    func prepareToStopEmitter() {
-        let index = self.emitterIndex
-        print(index)
+    func prepareToStopEmitter(emitter: CAEmitterLayer) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            print(index)
-            self.emitters[index].birthRate = 0
-            
-            // increment the index to use next emitter
-            self.updateEmitterIndex()
+            emitter.birthRate = 0
         }
-        print(Date())
-//        Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(stopEmitter(timer:)), userInfo: ["parameter" : Date()], repeats: false)
-    }
-    
-    func stopEmitter(timer: Timer) {
-
-
-        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 12) {
+            emitter.removeFromSuperlayer()
+        }
     }
     
     // MARK: - Other
@@ -124,10 +99,6 @@ class ViewController: UIViewController {
             
             currentFace = newImage!
         }
-    }
-    
-    func updateEmitterIndex() {
-        emitterIndex = (emitterIndex + 1) % 10
     }
 }
 
